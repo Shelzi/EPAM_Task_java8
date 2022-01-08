@@ -10,12 +10,6 @@ public class StrongTrial extends Trial {
         super(name, mark1, mark2);
     }
 
-/*
-    public StrongTrial(Trial trial) {
-        super(trial);
-    }
-*/
-
     protected int result() {
         return (getMark1() / MARK1_COEFFICIENT + getMark2());
     }

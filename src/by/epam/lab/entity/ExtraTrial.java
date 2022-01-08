@@ -29,6 +29,13 @@ public class ExtraTrial extends Trial {
     }
 
     @Override
+    public Trial refreshMarks() {
+        super.refreshMarks();
+        mark3 = 0;
+        return this;
+    }
+
+    @Override
     public String toString() {
         return String.format("%s;%d;%d;%d;%b",
                 getName(), getMark1(), getMark2(), getMark3(), isPassed());

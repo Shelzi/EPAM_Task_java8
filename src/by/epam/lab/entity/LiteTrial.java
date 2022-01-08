@@ -11,6 +11,10 @@ public class LiteTrial extends Trial {
         super(name, mark1, mark2);
     }
 
+   /* public LiteTrial(Trial trial){
+        super(trial);
+    }*/
+
     public boolean isPassed() {
         return getMark1() >= PASS_MARK1 && getMark2() >= PASS_MARK2;
     }

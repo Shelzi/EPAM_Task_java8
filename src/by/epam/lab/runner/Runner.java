@@ -7,10 +7,10 @@ import by.epam.lab.entity.Trial;
 import by.epam.lab.util.Utils;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
 public class Runner {
@@ -44,13 +44,24 @@ public class Runner {
         trials.stream().forEach(s -> System.out.println(s.getMark1() + s.getMark2()));
         System.out.println();
 
-        List<Trial> nonPassedTrials = trials.stream().filter(((Predicate<Trial>) Trial::isPassed).negate()).collect(Collectors.toList());
-        Utils.clearMarksOfFailTrials(nonPassedTrials);
-        Utils.printTrials(nonPassedTrials);
+        List<Trial> nonPassedTrials = trials.stream()
+                .filter((p) -> !p.isPassed())
+                .collect(Collectors.toList());
+
+        List<Trial> nonPassedTrialsClone = nonPassedTrials.stream()
+                .filter((p) -> !p.isPassed())
+                .map(Trial::clone)
+                .peek(Trial::refreshMarks)
+                .collect(Collectors.toList());
+
+        Utils.printTrials(nonPassedTrialsClone);
+
+        int[] arr = trials.stream()
+                .mapToInt((ToIntFunction<? super Trial>) t -> (t.getMark1() + t.getMark2()))
+                .toArray();
         System.out.println();
 
-        System.out.println(Utils.trialsHalfAveragePassMark(trials));
-
-        //Utils.findEqualTrial(trials, new ExtraTrial("Smartguy", 89, 90, 80));
+        Arrays.stream(arr).forEach(System.out::println);
+        System.out.println();
     }
 }

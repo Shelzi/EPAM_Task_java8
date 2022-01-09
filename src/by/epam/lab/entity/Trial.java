@@ -74,7 +74,7 @@ public class Trial implements Comparable<Trial>, Cloneable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Trial)) {
             return false;
         }
         Trial trial = (Trial) o;

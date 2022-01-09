@@ -6,10 +6,9 @@ import by.epam.lab.entity.StrongTrial;
 import by.epam.lab.entity.Trial;
 import by.epam.lab.util.Utils;
 
-
-import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
@@ -44,17 +43,13 @@ public class Runner {
         trials.stream().forEach(s -> System.out.println(s.getMark1() + s.getMark2()));
         System.out.println();
 
-        List<Trial> nonPassedTrials = trials.stream()
-                .filter((p) -> !p.isPassed())
-                .collect(Collectors.toList());
-
-        List<Trial> nonPassedTrialsClone = nonPassedTrials.stream()
+        List<Trial> nonPassedTrialsClone = trials.stream()
                 .filter((p) -> !p.isPassed())
                 .map(Trial::clone)
                 .peek(Trial::refreshMarks)
                 .collect(Collectors.toList());
-
         Utils.printTrials(nonPassedTrialsClone);
+        System.out.println();
 
         int[] arr = trials.stream()
                 .mapToInt((ToIntFunction<? super Trial>) t -> (t.getMark1() + t.getMark2()))

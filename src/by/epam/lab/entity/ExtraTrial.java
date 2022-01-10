@@ -12,6 +12,16 @@ public class ExtraTrial extends Trial {
         this.mark3 = mark3;
     }
 
+    public ExtraTrial(ExtraTrial extraTrial) {
+        super(extraTrial);
+        this.mark3 = extraTrial.mark3;
+    }
+
+    @Override
+    public ExtraTrial getCopy() {
+        return new ExtraTrial(this);
+    }
+
     public int getMark3() {
         return mark3;
     }

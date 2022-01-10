@@ -2,7 +2,7 @@ package by.epam.lab.entity;
 
 import java.util.Objects;
 
-public class Trial implements Comparable<Trial>, Cloneable {
+public class Trial implements Comparable<Trial> {
     protected static final int PASS_MARK = 120;
     private String name;
     private int mark1;
@@ -15,6 +15,12 @@ public class Trial implements Comparable<Trial>, Cloneable {
         this.name = name;
         this.mark1 = mark1;
         this.mark2 = mark2;
+    }
+
+    public Trial(Trial trial) {
+        name = trial.name;
+        mark1 = trial.mark1;
+        mark2 = trial.mark2;
     }
 
     public String getName() {
@@ -63,6 +69,10 @@ public class Trial implements Comparable<Trial>, Cloneable {
         return this;
     }
 
+    public Trial getCopy() {
+        return new Trial(this);
+    }
+
     @Override
     public String toString() {
         return String.format("%s;%d;%d;%b",
@@ -85,14 +95,5 @@ public class Trial implements Comparable<Trial>, Cloneable {
     @Override
     public int compareTo(Trial o) {
         return ((mark1 + mark2) - (o.mark1 + o.mark2));
-    }
-
-    @Override
-    public Trial clone() {
-        try {
-            return (Trial) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
     }
 }

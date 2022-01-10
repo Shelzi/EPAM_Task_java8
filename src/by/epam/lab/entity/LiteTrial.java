@@ -11,6 +11,15 @@ public class LiteTrial extends Trial {
         super(name, mark1, mark2);
     }
 
+    public LiteTrial(LiteTrial liteTrial) {
+        super(liteTrial);
+    }
+
+    @Override
+    public LiteTrial getCopy() {
+        return new LiteTrial(this);
+    }
+
     public boolean isPassed() {
         return getMark1() >= PASS_MARK1 && getMark2() >= PASS_MARK2;
     }

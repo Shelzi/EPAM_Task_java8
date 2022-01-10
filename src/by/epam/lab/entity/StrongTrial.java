@@ -10,6 +10,15 @@ public class StrongTrial extends Trial {
         super(name, mark1, mark2);
     }
 
+    public StrongTrial(StrongTrial strongTrial) {
+        super(strongTrial);
+    }
+
+    @Override
+    public StrongTrial getCopy() {
+        return new StrongTrial(this);
+    }
+
     protected int result() {
         return (getMark1() / MARK1_COEFFICIENT + getMark2());
     }
